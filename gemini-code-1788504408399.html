@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Інформатика 11 Клас — Навчальний портал</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --accent-color: #2563eb;
+            --accent-hover: #1d4ed8;
+            --border-color: #e2e8f0;
+            
+            --danger-color: #ef4444;
+            --danger-bg: #fef2f2;
+            --warning-color: #f59e0b;
+            --success-color: #10b981;
+            --success-bg: #ecfdf5;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .hero-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-header h1 {
+            font-size: 2.25rem;
+            margin: 0.75rem 0 0.5rem;
+            font-weight: 700;
+        }
+
+        .hero-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        /* Navigation */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            overflow-x: auto;
+            align-items: center;
+        }
+
+        .nav-container a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            white-space: nowrap;
+            transition: color 0.2s;
+        }
+
+        .nav-container a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-container .nav-btn {
+            background: var(--accent-color);
+            color: white;
+            padding: 0.4rem 0.9rem;
+            border-radius: 6px;
+            margin-left: auto;
+        }
+
+        .nav-container .nav-btn:hover {
+            background: var(--accent-hover);
+            color: white;
+        }
+
+        /* Main Layout */
+        .main-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.75rem;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .card.border-warning {
+            border-left: 5px solid var(--danger-color);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .icon-box.blue { background: #dbeafe; }
+        .icon-box.red { background: #fee2e2; }
+        .icon-box.green { background: #dcfce7; }
+        .icon-box.purple { background: #f3e8ff; }
+        .icon-box.orange { background: #ffedd5; }
+
+        .card-header h2 {
+            font-size: 1.35rem;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Section specific styling */
+        .info-banner {
+            background: #f1f5f9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.25rem;
+        }
+
+        .custom-list {
+            padding-left: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .code-tag {
+            background: #e2e8f0;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+        }
+
+        .deadline-tag {
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color: #c2410c;
+        }
+
+        /* Alert Box */
+        .alert-box {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-box.danger {
+            background: var(--danger-bg);
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+
+        .alert-icon { font-size: 1.5rem; }
+
+        .section-subheading {
+            font-size: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .grid-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .grid-item {
+            background: #f8fafc;
+            padding: 0.75rem 1rem;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Table */
+        .table-wrapper {
+            overflow-x: auto;
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .styled-table th, .styled-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table th {
+            background: #f1f5f9;
+            font-weight: 600;
+        }
+
+        .level-badge {
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .level-badge.low { background: #fee2e2; color: #991b1b; }
+        .level-badge.mid { background: #fef3c7; color: #92400e; }
+        .level-badge.good { background: #e0e7ff; color: #3730a3; }
+        .level-badge.high { background: #dcfce7; color: #166534; }
+
+        /* Integrity Law Section */
+        .law-card {
+            background: #faf5ff;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid #e9d5ff;
+        }
+
+        .law-quote {
+            font-style: italic;
+            color: #581c87;
+            margin-bottom: 1.25rem;
+            padding-left: 1rem;
+            border-left: 3px solid #a855f7;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .col-title { margin-bottom: 0.5rem; font-size: 0.95rem; }
+        .success-text { color: #15803d; }
+        .danger-text { color: #b91c1c; }
+
+        .check-list, .cross-list {
+            list-style: none;
+            font-size: 0.9rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .law-link-wrapper {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--border-color);
+            text-align: center;
+        }
+
+        .law-link-btn {
+            display: inline-block;
+            background-color: #f1f5f9;
+            color: var(--accent-hover);
+            border: 1px solid #cbd5e1;
+            padding: 0.75rem 1.25rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .law-link-btn:hover {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Interactive Quiz */
+        .quiz-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .quiz-card {
+            background: #f8fafc;
+            padding: 1.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .quiz-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .quiz-card h3 {
+            font-size: 1.05rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .options, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .radio-btn, .checkbox-btn {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            cursor: pointer;
+        }
+
+        .btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .btn-primary { background: var(--accent-color); color: white; }
+        .btn-primary:hover { background: var(--accent-hover); }
+
+        .btn-success { background: var(--success-color); color: white; }
+        .btn-success:hover { background: #059669; }
+
+        .result-msg {
+            margin-top: 0.75rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .result-msg.correct { color: var(--success-color); }
+        .result-msg.wrong { color: var(--danger-color); }
+
+        .score-display {
+            font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border-color);
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-header">
+        <div class="header-content">
+            <span class="badge">11 КЛАС</span>
+            <h1>Інформатика & Академічна доброчесність</h1>
+            <p>Практичні завдання, критерії оцінювання та правила безпеки</p>
+        </div>
+    </header>
+
+    <nav class="sticky-nav">
+        <div class="nav-container">
+            <a href="#lesson">Заняття</a>
+            <a href="#safety">Правила безпеки</a>
+            <a href="#criteria">Оцінювання</a>
+            <a href="#integrity">Доброчесність</a>
+            <a href="#interactive" class="nav-btn">Самоперевірка</a>
+        </div>
+    </nav>
+
+    <main class="main-container">
+
+        <!-- Секція: Заняття -->
+        <section id="lesson" class="card">
+            <div class="card-header">
+                <div class="icon-box blue">📊</div>
+                <div>
+                    <h2>Практична робота</h2>
+                    <p class="subtitle">Аналіз даних у табличному процесорі Excel та побудова моделей</p>
+                </div>
+            </div>
+            
+            <div class="info-banner">
+                <strong>🎯 Мета:</strong> Закріпити навички роботи з логічними функціями та створення діаграм для аналізу статистичних даних.
+            </div>
+
+            <div class="task-card">
+                <h3>Покроковий алгоритм виконання:</h3>
+                <ol class="custom-list">
+                    <li>Завантажте початковий файл із даними (або створіть таблицю з 10 рядків із показниками успішності).</li>
+                    <li>Використовуючи функцію <code class="code-tag">IF</code> (ЯКЩО) та <code class="code-tag">AVERAGE</code> (СРЗНАЧ), розрахуйте середній бал кожного учня та визначте його статус (<em>"Зараховано" / "Потребує покращення"</em>).</li>
+                    <li>Побудуйте стовпчасту діаграму для порівняння середніх балів.</li>
+                    <li>Збережіть файл під назвою <code class="code-tag">Прізвище_11Клас_Практична1.xlsx</code> та надішліть на перевірку.</li>
+                </ol>
+            </div>
+            <div class="deadline-tag">⏰ <strong>Термін сдачі:</strong> До кінця поточного тижня</div>
+        </section>
+
+        <!-- Секція: Правила безпеки -->
+        <section id="safety" class="card border-warning">
+            <div class="card-header">
+                <div class="icon-box red">⚡</div>
+                <div>
+                    <h2>Вимоги безпеки при роботі з ПК</h2>
+                    <p class="subtitle">Правила техніки безпеки у комп'ютерному класі</p>
+                </div>
+            </div>
+
+            <div class="alert-box danger">
+                <span class="alert-icon">⚠️</span>
+                <div>
+                    <strong>УВАГА! НЕБЕЗПЕКА ДЛЯ ЖИТТЯ!</strong><br>
+                    Апаратура ПК використовує напругу живлення <strong>220 В</strong>. Необхідно знати та суворо дотримуватися правил безпеки.
+                </div>
+            </div>
+
+            <h3 class="section-subheading">При роботі з ПК суворо забороняється:</h3>
+            <div class="grid-list">
+                <div class="grid-item"><span>🔌</span> Користуватися нестандартними (без заземлення) чи несправними розетками.</div>
+                <div class="grid-item"><span>👉</span> Торкатися пристроїв заземлення, тильного боку монітора та дротів під напругою.</div>
+                <div class="grid-item"><span>🛠️</span> Відкривати корпуси ПК та периферійних пристроїв без відключення живлення.</div>
+                <div class="grid-item"><span>🚫</span> Самостійно підключати чи відключати блоки апаратури у класі.</div>
+                <div class="grid-item"><span>⚙️</span> Порушувати порядок увімкнення/вимкнення та самостійно ремонтувати ПК.</div>
+                <div class="grid-item"><span>🎒</span> Класти на апаратуру сторонні предмети (зошити, їжу, напої).</div>
+                <div class="grid-item"><span>💧</span> Працювати за комп'ютером у вологій одежі або з вологими руками.</div>
+            </div>
+        </section>
+
+        <!-- Секція: Критерії оцінювання -->
+        <section id="criteria" class="card">
+            <div class="card-header">
+                <div class="icon-box green">🏆</div>
+                <div>
+                    <h2>Критерії оцінювання</h2>
+                    <p class="subtitle">Максимальна оцінка за виконання завдання — 12 балів</p>
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Рівень</th>
+                            <th>Бали</th>
+                            <th>Критерії виконання роботи</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="level-low">
+                            <td><span class="level-badge low">Початковий</span></td>
+                            <td><strong>1 – 3</strong></td>
+                            <td>Таблиця створена частково, розрахунки здійснені вручну без використання формул.</td>
+                        </tr>
+                        <tr class="level-mid">
+                            <td><span class="level-badge mid">Середній</span></td>
+                            <td><strong>4 – 6</strong></td>
+                            <td>Таблиця заповнена повністю, використано базові математичні формули, але є помилки в логічних функціях.</td>
+                        </tr>
+                        <tr class="level-good">
+                            <td><span class="level-badge good">Достатній</span></td>
+                            <td><strong>7 – 9</strong></td>
+                            <td>Вірно застосовано функції <code>IF</code> та <code>AVERAGE</code>, побудовано діаграму, незначні огріхи в оформленні.</td>
+                        </tr>
+                        <tr class="level-high">
+                            <td><span class="level-badge high">Високий</span></td>
+                            <td><strong>10 – 12</strong></td>
+                            <td>Завдання виконано повністю та безпомилково. Формули оптимізовано, діаграма підписана, назву файлу дотримано.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Секція: Академічна доброчесність -->
+        <section id="integrity" class="card">
+            <div class="card-header">
+                <div class="icon-box purple">⚖️</div>
+                <div>
+                    <h2>Академічна доброчесність</h2>
+                    <p class="subtitle">Закон України «Про освіту» (Стаття 42)</p>
+                </div>
+            </div>
+
+            <div class="law-card">
+                <blockquote class="law-quote">
+                    «<strong>Академічна доброчесність</strong> — це сукупність етичних принципів та визначених законом правил, якими мають керуватися учасники освітнього процесу під час навчання з метою забезпечення довіри до результатів навчання.»
+                </blockquote>
+
+                <div class="two-columns">
+                    <div class="column">
+                        <h4 class="col-title success-text">✅ Дотримання передбачає:</h4>
+                        <ul class="check-list">
+                            <li>Самостійне виконання навчальних завдань;</li>
+                            <li>Посилання на джерела у разі використання ідей чи відомостей;</li>
+                            <li>Дотримання норм про авторське право;</li>
+                            <li>Надання достовірної інформації про власні результати.</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4 class="col-title danger-text">❌ Порушеннями вважаються:</h4>
+                        <ul class="cross-list">
+                            <li><strong>Академічний плагіат:</strong> видача чужих результатів за власні;</li>
+                            <li><strong>Списування:</strong> виконання робіт із зовнішніми джерелами;</li>
+                            <li><strong>Фабрикація/Фальсифікація:</strong> вигадування чи підробка даних.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="law-link-wrapper">
+                    <a href="https://zakon.rada.gov.ua/laws/show/2145-19#n930" target="_blank" rel="noopener noreferrer" class="law-link-btn">
+                        📖 Ознайомитися зі Статтею 42 на порталі Верховної Ради України ↗
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Секція: Інтерактив -->
+        <section id="interactive" class="card">
+            <div class="card-header">
+                <div class="icon-box orange">🎮</div>
+                <div>
+                    <h2>Інтерактивна самоперевірка</h2>
+                    <p class="subtitle">Перевірте свої знання перед здачею роботи</p>
+                </div>
+            </div>
+
+            <div class="quiz-container">
+                <!-- Тест 1 -->
+                <div class="quiz-card">
+                    <h3>1. Академічна доброчесність</h3>
+                    <p>Чи дозволено скопіювати готову формулу або файл у однокласника?</p>
+                    <div class="options">
+                        <label class="radio-btn"><input type="radio" name="quiz" value="yes"> <span>Так, це взаємодопомога</span></label>
+                        <label class="radio-btn"><input type="radio" name="quiz" value="no"> <span>Ні, це плагіат та порушення закону</span></label>
+                    </div>
+                    <button class="btn btn-primary" onclick="checkQuiz()">Перевірити</button>
+                    <div id="quiz-result" class="result-msg"></div>
+                </div>
+
+                <!-- Тест 2 -->
+                <div class="quiz-card">
+                    <h3>2. Техніка безпеки</h3>
+                    <p>Яка напруга живлення використовується апаратурою ПК у класі?</p>
+                    <div class="options">
+                        <label class="radio-btn"><input type="radio" name="safetyQuiz" value="12V"> <span>12 В (безпечна)</span></label>
+                        <label class="radio-btn"><input type="radio" name="safetyQuiz" value="220V"> <span>220 В (небезпечна для життя)</span></label>
+                    </div>
+                    <button class="btn btn-primary" onclick="checkSafetyQuiz()">Перевірити</button>
+                    <div id="safety-quiz-result" class="result-msg"></div>
+                </div>
+
+                <!-- Калькулятор -->
+                <div class="quiz-card full-width">
+                    <h3>3. Калькулятор очікуваного балу</h3>
+                    <p>Позначте пункти, які ви успішно виконали:</p>
+                    <div class="checkbox-group">
+                        <label class="checkbox-btn"><input type="checkbox" id="c1" value="3"> <span>Таблиця повністю заповнена (+3 бали)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" id="c2" value="3"> <span>Використано формули IF та AVERAGE (+3 бали)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" id="c3" value="3"> <span>Побудовано та підписано діаграму (+3 бали)</span></label>
+                        <label class="checkbox-btn"><input type="checkbox" id="c4" value="3"> <span>Дотримано правил оформлення та назви (+3 бали)</span></label>
+                    </div>
+                    <button class="btn btn-success" onclick="calculateScore()">Розрахувати бал</button>
+                    <div id="calc-result" class="result-msg score-display"></div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Навчальний портал з інформатики. Всі права захищено.</p>
+    </footer>
+
+    <script>
+        // Перевірка Тесту №1 (Академічна доброчесність)
+        function checkQuiz() {
+            const selectedOption = document.querySelector('input[name="quiz"]:checked');
+            const resultDiv = document.getElementById('quiz-result');
+
+            if (!selectedOption) {
+                resultDiv.className = 'result-msg wrong';
+                resultDiv.textContent = 'Будь ласка, оберіть відповідь!';
+                return;
+            }
+
+            if (selectedOption.value === 'no') {
+                resultDiv.className = 'result-msg correct';
+                resultDiv.textContent = 'Правильно! Передавати або копіювати чужі роботи є академічним плагіатом.';
+            } else {
+                resultDiv.className = 'result-msg wrong';
+                resultDiv.textContent = 'Невірно. Надання чужої роботи під своїм іменем суперечить Закону України «Про освіту».';
+            }
+        }
+
+        // Перевірка Тесту №2 (Техніка безпеки)
+        function checkSafetyQuiz() {
+            const selectedOption = document.querySelector('input[name="safetyQuiz"]:checked');
+            const resultDiv = document.getElementById('safety-quiz-result');
+
+            if (!selectedOption) {
+                resultDiv.className = 'result-msg wrong';
+                resultDiv.textContent = 'Будь ласка, оберіть відповідь!';
+                return;
+            }
+
+            if (selectedOption.value === '220V') {
+                resultDiv.className = 'result-msg correct';
+                resultDiv.textContent = 'Правильно! Робоча напруга ПК становить 220 В, що потребує суворого дотримання правил безпеки.';
+            } else {
+                resultDiv.className = 'result-msg wrong';
+                resultDiv.textContent = 'Невірно. ПК підключено до мережі 220 В!';
+            }
+        }
+
+        // Калькулятор очікуваного балу
+        function calculateScore() {
+            let totalScore = 0;
+            const checkboxes = document.querySelectorAll('.checkbox-group input[type="checkbox"]');
+
+            checkboxes.forEach((cb) => {
+                if (cb.checked) {
+                    totalScore += parseInt(cb.value);
+                }
+            });
+
+            const resultDiv = document.getElementById('calc-result');
+            resultDiv.textContent = `Ваш очікуваний бал: ${totalScore} з 12 балів.`;
+        }
+    </script>
+</body>
+</html>
